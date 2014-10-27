@@ -1,0 +1,22 @@
+{
+    "version": "0.0.2",
+    "paths": [
+        {
+            "path": "java.lang:type=MemoryPool,name=Code Cache:Usage",
+            "alias": "test1",
+            "operate": "/",
+            "scale": 10000,
+            "unit": "KB"
+        },
+        {
+            "path": "java.lang:type=MemoryPool,name=Code Cache:Usage",
+            "alias": "test2",
+            "unit": "B"
+        },
+        {
+            "path": "counter@jav*ng:type=*,name=Code Cache:Usage.committed",
+            "alias": "test3",
+            "unit": "B"
+        }
+    ]
+}

@@ -1,0 +1,198 @@
+{
+    "version": "0.0.2",
+    "paths": [
+        {
+            "path": "\"kafka.server\":type=\"BrokerTopicMetrics\",name=\"AllTopicsBytesInPerSec\":Count",
+            "alias": "AllTopicsBytes",
+            "operate": "/",
+            "scale": 1024,
+            "unit": "KB"
+        },
+        {
+            "path": "\"kafka.server\":type=\"BrokerTopicMetrics\",name=\"AllTopicsFailedProduceRequestsPerSec\":Count",
+            "alias": "AllTopicsFailedProduceRequestsPerSec"
+        },
+        {
+            "path": "\"kafka.server\":type=\"BrokerTopicMetrics\",name=\"AllTopicsMessagesInPerSec\":Count",
+            "alias": "AllTopicsMessagesInPerSec"
+        },
+        {
+            "path": "\"kafka.server\":type=\"BrokerTopicMetrics\",name=\"AllTopicsLogBytesAppendedPerSec\":Count",
+            "alias": "AllTopicsLogBytesAppendedPerSec",
+            "operate": "/",
+            "scale": 1024,
+            "unit": "KB"
+        },
+        {
+            "path": "\"kafka.server\":type=\"BrokerTopicMetrics\",name=\"AllTopicsBytesOutPerSec\":Count",
+            "alias": "AllTopicsBytesOutPerSec",
+            "operate": "/",
+            "scale": 1024,
+            "unit": "KB"
+        },
+        {
+            "path": "\"kafka.server\":type=\"BrokerTopicMetrics\",name=\"AllTopicsFailedFetchRequestsPerSec\":Count",
+            "alias": "AllTopicsFailedFetchRequestsPerSec"
+        },
+        {
+            "path": "\"kafka.controller\":type=\"ControllerStats\",name=\"LeaderElectionRateAndTimeMs\":50thPercentile",
+            "alias": "LeaderElectionRate_50thPercentile"
+        },
+        {
+            "path": "\"kafka.controller\":type=\"ControllerStats\",name=\"LeaderElectionRateAndTimeMs\":75thPercentile",
+            "alias": "LeaderElectionRate_75thPercentile"
+        },
+        {
+            "path": "\"kafka.controller\":type=\"ControllerStats\",name=\"LeaderElectionRateAndTimeMs\":95thPercentile",
+            "alias": "LeaderElectionRate_95thPercentile"
+        },
+        {
+            "path": "\"kafka.controller\":type=\"ControllerStats\",name=\"LeaderElectionRateAndTimeMs\":99thPercentile",
+            "alias": "LeaderElectionRate_99thPercentile"
+        },
+        {
+            "path": "\"kafka.controller\":type=\"ControllerStats\",name=\"LeaderElectionRateAndTimeMs\":Count",
+            "alias": "LeaderElectionRate"
+        },
+        {
+            "path": "\"kafka.log\":type=\"LogFlushStats\",name=\"LogFlushRateAndTimeMs\":Count",
+            "alias": "LogFlushRate"
+        },
+        {
+            "path": "\"kafka.network\":type=\"RequestChannel\",name=\"RequestQueueSize\":Value",
+            "alias": "NetworkRequestQueueSize"
+        },
+        {
+            "path": "\"kafka.network\":type=\"RequestMetrics\",name=\"ControlledShutdown-TotalTimeMs\":75thPercentile",
+            "alias": "ControlledShutdown-TotalTimeMs_75thPercentile"
+        },
+        {
+            "path": "\"kafka.network\":type=\"RequestMetrics\",name=\"ControlledShutdown-TotalTimeMs\":95thPercentile",
+            "alias": "ControlledShutdown-TotalTimeMs_95thPercentile"
+        },
+        {
+            "path": "\"kafka.network\":type=\"RequestMetrics\",name=\"ControlledShutdown-TotalTimeMs\":Count",
+            "alias": "ControlledShutdown-TotalTimeMs"
+        },
+        {
+            "path": "\"kafka.network\":type=\"RequestMetrics\",name=\"UpdateMetadata-TotalTimeMs\":75thPercentile",
+            "alias": "UpdateMetadata-TotalTimeMs_75thPercentile"
+        },
+        {
+            "path": "\"kafka.network\":type=\"RequestMetrics\",name=\"UpdateMetadata-TotalTimeMs\":95thPercentile",
+            "alias": "UpdateMetadata-TotalTimeMs_95thPercentile"
+        },
+        {
+            "path": "\"kafka.network\":type=\"RequestMetrics\",name=\"UpdateMetadata-TotalTimeMs\":Count",
+            "alias": "UpdateMetadata-TotalTimeMs"
+        },
+        {
+            "path": "\"kafka.network\":type=\"RequestMetrics\",name=\"Fetch-Consumer-TotalTimeMs\":75thPercentile",
+            "alias": "Fetch-Consumer-TotalTimeMs_75thPercentile"
+        },
+        {
+            "path": "\"kafka.network\":type=\"RequestMetrics\",name=\"Fetch-Consumer-TotalTimeMs\":95thPercentile",
+            "alias": "Fetch-Consumer-TotalTimeMs_95thPercentile"
+        },
+        {
+            "path": "\"kafka.network\":type=\"RequestMetrics\",name=\"Fetch-Consumer-TotalTimeMs\":Count",
+            "alias": "Fetch-Consumer-TotalTimeMs"
+        },
+        {
+            "path": "\"kafka.network\":type=\"RequestMetrics\",name=\"Fetch-Follower-TotalTimeMs\":75thPercentile",
+            "alias": "Fetch-Follower-TotalTimeMs_75thPercentile"
+        },
+        {
+            "path": "\"kafka.network\":type=\"RequestMetrics\",name=\"Fetch-Follower-TotalTimeMs\":95thPercentile",
+            "alias": "Fetch-Follower-TotalTimeMs_95thPercentile"
+        },
+        {
+            "path": "\"kafka.network\":type=\"RequestMetrics\",name=\"Fetch-Follower-TotalTimeMs\":Count",
+            "alias": "Fetch-Follower-TotalTimeMs"
+        },
+        {
+            "path": "\"kafka.network\":type=\"RequestMetrics\",name=\"Fetch-TotalTimeMs\":75thPercentile",
+            "alias": "Fetch-TotalTimeMs_75thPercentile"
+        },
+        {
+            "path": "\"kafka.network\":type=\"RequestMetrics\",name=\"Fetch-TotalTimeMs\":95thPercentile",
+            "alias": "Fetch-TotalTimeMs_95thPercentile"
+        },
+        {
+            "path": "\"kafka.network\":type=\"RequestMetrics\",name=\"Fetch-TotalTimeMs\":Count",
+            "alias": "Fetch-TotalTimeMs"
+        },
+        {
+            "path": "\"kafka.network\":type=\"RequestMetrics\",name=\"OffsetFetch-TotalTimeMs\":75thPercentile",
+            "alias": "OffsetFetch-TotalTimeMs_75thPercentile"
+        },
+        {
+            "path": "\"kafka.network\":type=\"RequestMetrics\",name=\"OffsetFetch-TotalTimeMs\":95thPercentile",
+            "alias": "OffsetFetch-TotalTimeMs_95thPercentile"
+        },
+        {
+            "path": "\"kafka.network\":type=\"RequestMetrics\",name=\"OffsetFetch-TotalTimeMs\":Count",
+            "alias": "OffsetFetch-TotalTimeMs"
+        },
+        {
+            "path": "\"kafka.network\":type=\"RequestMetrics\",name=\"Metadata-TotalTimeMs\":75thPercentile",
+            "alias": "Metadata-TotalTimeMs_75thPercentile"
+        },
+        {
+            "path": "\"kafka.network\":type=\"RequestMetrics\",name=\"Metadata-TotalTimeMs\":95thPercentile",
+            "alias": "Metadata-TotalTimeMs_95thPercentile"
+        },
+        {
+            "path": "\"kafka.network\":type=\"RequestMetrics\",name=\"Metadata-TotalTimeMs\":Count",
+            "alias": "Metadata-TotalTimeMs"
+        },
+        {
+            "path": "\"kafka.network\":type=\"RequestMetrics\",name=\"LeaderAndIsr-TotalTimeMs\":75thPercentile",
+            "alias": "LeaderAndIsr-TotalTimeMs_75thPercentile"
+        },
+        {
+            "path": "\"kafka.network\":type=\"RequestMetrics\",name=\"LeaderAndIsr-TotalTimeMs\":95thPercentile",
+            "alias": "LeaderAndIsr-TotalTimeMs_95thPercentile"
+        },
+        {
+            "path": "\"kafka.network\":type=\"RequestMetrics\",name=\"LeaderAndIsr-TotalTimeMs\":Count",
+            "alias": "LeaderAndIsr-TotalTimeMs"
+        },
+        {
+            "path": "\"kafka.network\":type=\"RequestMetrics\",name=\"StopReplica-TotalTimeMs\":75thPercentile",
+            "alias": "StopReplica-TotalTimeMs_75thPercentile"
+        },
+        {
+            "path": "\"kafka.network\":type=\"RequestMetrics\",name=\"StopReplica-TotalTimeMs\":95thPercentile",
+            "alias": "StopReplica-TotalTimeMs_95thPercentile"
+        },
+        {
+            "path": "\"kafka.network\":type=\"RequestMetrics\",name=\"StopReplica-TotalTimeMs\":Count",
+            "alias": "StopReplica-TotalTimeMs"
+        },
+        {
+            "path": "\"kafka.network\":type=\"RequestMetrics\",name=\"OffsetCommit-TotalTimeMs\":75thPercentile",
+            "alias": "OffsetCommit-TotalTimeMs_75thPercentile"
+        },
+        {
+            "path": "\"kafka.network\":type=\"RequestMetrics\",name=\"OffsetCommit-TotalTimeMs\":95thPercentile",
+            "alias": "OffsetCommit-TotalTimeMs_95thPercentile"
+        },
+        {
+            "path": "\"kafka.network\":type=\"RequestMetrics\",name=\"OffsetCommit-TotalTimeMs\":Count",
+            "alias": "OffsetCommit-TotalTimeMs"
+        },
+        {
+            "path": "\"kafka.network\":type=\"RequestMetrics\",name=\"Produce-TotalTimeMs\":75thPercentile",
+            "alias": "Produce-TotalTimeMs_75thPercentile"
+        },
+        {
+            "path": "\"kafka.network\":type=\"RequestMetrics\",name=\"Produce-TotalTimeMs\":95thPercentile",
+            "alias": "Produce-TotalTimeMs_95thPercentile"
+        },
+        {
+            "path": "\"kafka.network\":type=\"RequestMetrics\",name=\"Produce-TotalTimeMs\":Count",
+            "alias": "Produce-TotalTimeMs"
+        }
+    ]
+}

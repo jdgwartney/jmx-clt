@@ -1,0 +1,121 @@
+import java.text.SimpleDateFormat;
+import java.util.regex.Pattern.*;
+
+//Definition apply plugin
+apply plugin: 'idea'
+apply plugin: 'java'
+apply plugin: 'maven'
+apply plugin: 'gradle-one-jar'
+apply plugin: 'distribution'
+
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath 'com.github.rholder:gradle-one-jar:1.0.4'
+    }
+}
+
+//--------------------------------- Based setting  for current project ---------------------------------
+
+// Definition sourceCompatibility and targetCompatibility.
+sourceCompatibility = JavaVersion.VERSION_1_6
+targetCompatibility = JavaVersion.VERSION_1_6
+
+
+// Definition all property
+ext {
+    MODULE                      = "FT"
+    VERSION_INFO_PATH           = "no info"
+    MAVEN_GROUP_ID              = "com.logicmonitor"
+    MAVEN_ARTIFACT_ID           = "jmxstat"
+    MAVEN_VERSION               = "1.0-SNAPSHOT"
+}
+
+// Access maven center.
+repositories {
+    mavenCentral()
+}
+
+// Definition source which should include.
+sourceSets {
+    main {
+        java {
+            srcDir 'src/main/java'
+        }
+    }
+    test {
+        java {
+            srcDir 'src/test/java'
+        }
+        resources {
+            srcDir 'src/test/resources'
+        }
+    }
+}
+
+//--------------------------------- Dependencies definition ---------------------------------
+
+dependencies {
+    compile(
+            "commons-beanutils:commons-beanutils:1.8.3",
+            "commons-collections:commons-collections:3.2.1",
+            "commons-io:commons-io:2.4",
+            "commons-lang:commons-lang:2.6",
+            "commons-logging:commons-logging:1.1.1",
+            "net.sf.ezmorph:ezmorph:1.0.6",
+            "org.fusesource.jansi:jansi:1.11",
+            "net.sf.json-lib:json-lib:2.4:jdk15",
+            "commons-cli:commons-cli:1.2"
+    )
+
+    compile fileTree('lib')
+
+    // Include non maven standard layout file into war
+    testCompile (
+            "junit:junit:4.10"
+    )
+}
+
+
+//--------------------------------- Specific Tasks --------------------------------
+task jmxStatJar(type: OneJar) {
+    mainClass = 'com.logicmonitor.ft.jmxstat.JMXStatMain'
+}
+
+task myTar(type: Tar) {
+    extension = 'tar.gz'
+    baseName = project.name
+    compression = Compression.GZIP
+
+    into("/JMXStat/conf/") { from "conf/" }
+
+    into("/JMXStat/bin") {
+        from("${project.rootDir}/build/libs")
+        include('JMXStat-standalone.jar')
+    }
+
+    into("/JMXStat/") {from "bin/"}
+}
+
+task myZip(type: Zip) {
+    into("/JMXStat/conf/") { from "conf/" }
+
+    into("/JMXStat/bin") {
+        from("${project.rootDir}/build/libs")
+        include('JMXStat-standalone.jar')
+    }
+
+    into("/JMXStat/") {from "bin/"}
+}
+
+task build(overwrite : true) {
+    dependsOn = ['clean', 'test', 'jmxStatJar', 'myZip', 'myTar']
+    test.mustRunAfter clean
+    jmxStatJar.mustRunAfter test
+    myZip.mustRunAfter jmxStatJar
+    myTar.mustRunAfter jmxStatJar
+}
+
+defaultTasks 'build'

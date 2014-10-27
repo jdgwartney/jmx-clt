@@ -1,0 +1,137 @@
+{
+    "version": "0.0.2", 
+    "paths": [
+        {
+            "path": "org.apache.ZooKeeperService:name0=*,name1=*,name2=Follower:AvgRequestLatency",
+            "alias": "Follower AverageLatency"
+        },
+        {
+            "path": "org.apache.ZooKeeperService:name0=*,name1=*,name2=Leader:AvgRequestLatency",
+            "alias": "Leader AverageLatency"
+        },
+        {
+            "path": "org.apache.ZooKeeperService:name0=*,name1=*,name2=Follower:MaxRequestLatency",
+            "alias": "Follower MaxRequestLatency"
+        },
+        {
+            "path": "org.apache.ZooKeeperService:name0=*,name1=*,name2=Leader:MaxRequestLatency",
+            "alias": "Leader MaxRequestLatency"
+        },
+        {
+            "path": "org.apache.ZooKeeperService:name0=*,name1=*,name2=Follower,name3=InMemoryDataTree:NodeCount",
+            "alias": "Follower NodeCount"
+        },
+        {
+            "path": "org.apache.ZooKeeperService:name0=*,name1=*,name2=Leader,name3=InMemoryDataTree:NodeCount",
+            "alias": "Leader NodeCount"
+        },
+        {
+            "path": "org.apache.ZooKeeperService:name0=*,name1=*,name2=Follower:OutstandingRequests",
+            "alias": "Follower OutstandingRequests"
+        },
+        {
+            "path": "org.apache.ZooKeeperService:name0=*,name1=*,name2=Leader:OutstandingRequests",
+            "alias": "Leader OutstandingRequests"
+        },
+        {
+            "path": "org.apache.ZooKeeperService:name0=*,name1=*,name2=Follower:PacketsReceived",
+            "alias": "Follower PacketsReceived"
+        },
+        {
+            "path": "org.apache.ZooKeeperService:name0=*,name1=*,name2=Leader:PacketsReceived",
+            "alias": "Leader PacketsReceived"
+        },
+        {
+            "path": "org.apache.ZooKeeperService:name0=*,name1=*,name2=Follower:PacketsSent",
+            "alias": "Follower PacketsSent"
+        },
+        {
+            "path": "org.apache.ZooKeeperService:name0=*,name1=*,name2=Leader:PacketsSent",
+            "alias": "Leader PacketsSent"
+        },
+        {
+            "path": "org.apache.ZooKeeperService:name0=*,name1=*,name2=Follower:QuorumAddress",
+            "alias": "Follower QuorumAddress"
+        },
+        {
+            "path": "org.apache.ZooKeeperService:name0=*,name1=*,name2=Leader:QuorumAddress",
+            "alias": "Leader QuorumAddress"
+        },
+        {
+            "path": "org.apache.ZooKeeperService:name0=*,name1=*,name2=Follower:LastQueuedZxid",
+            "alias": "Follower LastQueuedZxid"
+        },
+        {
+            "path": "org.apache.ZooKeeperService:name0=*,name1=*,name2=Leader:LastQueuedZxid",
+            "alias": "Leader LastQueuedZxid"
+        },
+        {
+            "path": "org.apache.ZooKeeperService:name0=*,name1=*,name2=Follower:TickTime",
+            "alias": "Follower TickTime"
+        },
+        {
+            "path": "org.apache.ZooKeeperService:name0=*,name1=*,name2=Leader:TickTime",
+            "alias": "Leader TickTime"
+        },
+        {
+            "path": "org.apache.ZooKeeperService:name0=*,name1=*,name2=Follower:MinSessionTimeout",
+            "alias": "Follower MinSessionTimeout"
+        },
+        {
+            "path": "org.apache.ZooKeeperService:name0=*,name1=*,name2=Leader:MinSessionTimeout",
+            "alias": "Leader MinSessionTimeout"
+        },
+        {
+            "path": "org.apache.ZooKeeperService:name0=*,name1=*,name2=Follower:MaxSessionTimeout",
+            "alias": "Follower MaxSessionTimeout"
+        },
+        {
+            "path": "org.apache.ZooKeeperService:name0=*,name1=*,name2=Leader:MaxSessionTimeout",
+            "alias": "Leader MaxSessionTimeout"
+        },
+        {
+            "path": "org.apache.ZooKeeperService:name0=*,name1=*,name2=Follower:NumAliveConnections",
+            "alias": "Follower NumAliveConnections"
+        },
+        {
+            "path": "org.apache.ZooKeeperService:name0=*,name1=*,name2=Leader:NumAliveConnections",
+            "alias": "Leader NumAliveConnections"
+        },
+        {
+            "path": "org.apache.ZooKeeperService:name0=*,name1=*,name2=Follower:MaxClientCnxnsPerHost",
+            "alias": "Follower MaxClientCnxnsPerHost"
+        },
+        {
+            "path": "org.apache.ZooKeeperService:name0=*,name1=*,name2=Leader:MaxClientCnxnsPerHost",
+            "alias": "Leader MaxClientCnxnsPerHost"
+        },
+        {
+            "path": "org.apache.ZooKeeperService:name0=*,name1=*,name2=Follower:ClientPort",
+            "alias": "Follower ClientPort"
+        },
+        {
+            "path": "org.apache.ZooKeeperService:name0=*,name1=*,name2=Leader:ClientPort",
+            "alias": "Leader ClientPort"
+        },
+        {
+            "path": "org.apache.ZooKeeperService:name0=*,name1=*,name2=Follower:PendingRevalidationCount",
+            "alias": "Follower PendingRevalidationCount"
+        },
+        {
+            "path": "org.apache.ZooKeeperService:name0=*,name1=*,name2=Leader,name3=InMemoryDataTree:NodeCount",
+            "alias": "Leader InMemoryDataTree NodeCount"
+        },
+        {
+            "path": "org.apache.ZooKeeperService:name0=*,name1=*,name2=Leader,name3=InMemoryDataTree:WatchCount",
+            "alias": "Leader InMemoryDataTree WatchCount"
+        },
+        {
+            "path": "org.apache.ZooKeeperService:name0=*,name1=*:QuorumAddress",
+            "alias": "QuorumAddress"
+        },
+        {
+            "path": "org.apache.ZooKeeperService:name0=*:QuorumSize",
+            "alias": "QuorumSize"
+        }
+    ]
+}

@@ -1,0 +1,99 @@
+import java.text.SimpleDateFormat;
+import java.util.regex.Pattern.*;
+
+//Definition apply plugin
+apply plugin: 'idea'
+apply plugin: 'java'
+apply plugin: 'maven'
+
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+}
+
+//--------------------------------- Based setting  for current project ---------------------------------
+
+// Definition sourceCompatibility and targetCompatibility.
+sourceCompatibility = JavaVersion.VERSION_1_6
+targetCompatibility = JavaVersion.VERSION_1_6
+
+
+// Definition all property
+ext {
+    MODULE                      = "FT"
+    VERSION_INFO_PATH           = "no info"
+    MAVEN_GROUP_ID              = "com.logicmonitor"
+    MAVEN_ARTIFACT_ID           = "jmxcommon"
+    MAVEN_VERSION               = "1.0-SNAPSHOT"
+}
+
+// Access maven center.
+repositories {
+    mavenCentral()
+}
+
+// Definition source which should include.
+sourceSets {
+    main {
+        java {
+            srcDir 'src/main/java'
+        }
+    }
+}
+
+//--------------------------------- Dependencies definition ---------------------------------
+
+dependencies {
+
+    // Include non maven standard layout file into war
+    testCompile (
+            "junit:junit:4.10"
+    )
+}
+
+// Define manifest
+ext.sharedManifest = manifest {
+    attributes(
+            'Modlue': "${MODULE}",
+            'Implementation-Title': "${project.name}",
+            'Built-Date': new Date().getDateTimeString(),
+            'Built-With': "gradle-${project.getGradle().getGradleVersion()}, groovy-${GroovySystem.getVersion()}",
+            'Created-By': 'Java ' + System.getProperty('java.version') + ' (' + System.getProperty('java.vendor') + ')'
+    )
+}
+
+jar {
+    manifest = project.manifest {
+        from sharedManifest
+    }
+}
+//--------------------------------- Specific Tasks --------------------------------
+
+task copyToJMXStatLib(type: Copy) {
+    copy{
+        from('build/libs') {
+            include('JMXCommon.jar')
+        }
+        into('../JMXStat/lib')
+    }
+}
+
+task copyToJMXTopLib(type: Copy) {
+    copy{
+        from('build/libs') {
+            include('JMXCommon.jar')
+        }
+        into('../JMXTop/lib')
+    }
+}
+
+task build(overwrite: true) {
+    dependsOn = ['clean', 'test', 'jar', 'copyToJMXStatLib', 'copyToJMXTopLib']
+    test.mustRunAfter clean
+    jar.mustRunAfter test
+    copyToJMXStatLib.mustRunAfter jar
+    copyToJMXTopLib.mustRunAfter jar
+}
+
+defaultTasks 'build'

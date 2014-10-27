@@ -1,0 +1,73 @@
+{
+    "version": "0.0.2", 
+    "paths": [
+        {
+            "path": "Catalina:type=Cache,host=localhost,path=*:accessCount",
+            "alias": "Cache accessCount"
+        }, 
+		{
+            "path": "Catalina:type=Cache,host=localhost,path=*:hitsCount",
+            "alias": "Cache hitsCount"
+        },
+		{
+            "path": "Catalina:type=DataSource,host=localhost,class=javax.sql.DataSource,path=*:numIdle",
+            "alias": "DataSource numIdle"
+        }, 
+		{
+            "path": "Catalina:type=DataSource,host=localhost,class=javax.sql.DataSource,path=*:numActive",
+            "alias": "DataSource numActive"
+        },
+		{
+            "path": "Catalina:type=DataSource,host=localhost,class=javax.sql.DataSource,path=*:maxActive",
+            "alias": "DataSource maxActive"
+        },
+		{
+            "path": "Catalina:type=Manager,host=localhost,path=*:activeSessions",
+            "alias": "Session activeSessions"
+        },
+		{
+            "path": "Catalina:type=Manager,host=localhost,path=*:rejectedSessions",
+            "alias": "Session rejectedSessions"
+        },
+		{
+            "path": "Catalina:type=Manager,host=localhost,path=*:sessionAverageAliveTime",
+            "alias": "Session sessionAverageAliveTime"
+        },
+		{
+            "path": "Catalina:type=Manager,host=localhost,path=*:sessionCounter",
+            "alias": "Session sessionCounter"
+        },
+		{
+            "path": "Catalina:type=GlobalRequestProcessor,name=*:requestCount",
+            "alias": "Requests requestCount "
+        },
+		{
+            "path": "Catalina:type=GlobalRequestProcessor,name=*:processingTime",
+            "alias": "Requests processingTime "
+        },
+		{
+            "path": "Catalina:type=GlobalRequestProcessor,name=*:errorCount",
+            "alias": "Requests errorCount"
+        },
+		{
+            "path": "Catalina:type=GlobalRequestProcessor,name=*:bytesSent",
+            "alias": "Requests bytesSent"
+        },
+		{
+            "path": "Catalina:type=GlobalRequestProcessor,name=*:bytesReceived",
+            "alias": "Requests bytesReceived"
+        },
+		{
+            "path": "Catalina:type=ThreadPool,name=*:BusyThreads",
+            "alias": "Threads BusyThreads"
+        },
+		{
+            "path": "Catalina:type=ThreadPool,name=*:CurrentThreads",
+            "alias": "Threads CurrentThreads"
+        },
+		{
+            "path": "Catalina:type=ThreadPool,name=*:MaxThreads",
+            "alias": "Threads MaxThreads"
+        }
+    ]
+}
