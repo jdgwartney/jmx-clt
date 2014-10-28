@@ -33,8 +33,8 @@ public class TestJMXStatMain {
     public void testARGSAnalyser() throws NoSuchMethodException, IllegalAccessException, InstantiationException, InvocationTargetException {
         Method method = JMXStatMain.class.getDeclaredMethod("ARGSAnalyser", String[].class);
         method.setAccessible(true);
-        String url = "service:jmx:rmi:///jndi/rmi://url";
-        String[] args = new String[]{url, "-u", "user", "-p", "password", "-t", "10", "-i", "20", "-A", "pathA"};
+        String url = "service:jmx:";
+        String[] args = new String[]{url, "-u", "user", "-p", "password", "-t", "10", "-i", "20", "-a", "pathA"};
         RunParameter runParameter = (RunParameter) method.invoke(null, (Object)args);
 
         // valid args

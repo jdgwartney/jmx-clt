@@ -3,10 +3,7 @@
     "paths": [
         {
             "path": "\"kafka.server\":type=\"BrokerTopicMetrics\",name=\"AllTopicsBytesInPerSec\":Count",
-            "alias": "AllTopicsBytes",
-            "operate": "/",
-            "scale": 1024,
-            "unit": "KB"
+            "alias": "AllTopicsBytes"
         },
         {
             "path": "\"kafka.server\":type=\"BrokerTopicMetrics\",name=\"AllTopicsFailedProduceRequestsPerSec\":Count",
@@ -18,17 +15,11 @@
         },
         {
             "path": "\"kafka.server\":type=\"BrokerTopicMetrics\",name=\"AllTopicsLogBytesAppendedPerSec\":Count",
-            "alias": "AllTopicsLogBytesAppendedPerSec",
-            "operate": "/",
-            "scale": 1024,
-            "unit": "KB"
+            "alias": "AllTopicsLogBytesAppendedPerSec"
         },
         {
             "path": "\"kafka.server\":type=\"BrokerTopicMetrics\",name=\"AllTopicsBytesOutPerSec\":Count",
-            "alias": "AllTopicsBytesOutPerSec",
-            "operate": "/",
-            "scale": 1024,
-            "unit": "KB"
+            "alias": "AllTopicsBytesOutPerSec"
         },
         {
             "path": "\"kafka.server\":type=\"BrokerTopicMetrics\",name=\"AllTopicsFailedFetchRequestsPerSec\":Count",

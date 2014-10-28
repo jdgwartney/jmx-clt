@@ -207,6 +207,13 @@ public class JMXMan {
         List<String> indexFilled = new ArrayList<String>();
         try {
             List<Object> results = client.evaluatePath(path);
+            List<Object> temp = new ArrayList<Object>();
+            for (Object object: results) {
+                if (!temp.contains(object)) {
+                    temp.add(object);
+                }
+            }
+            results = temp;
 
             if (path.isWildcardDomain()) {
                 if (path.hasIndexProperty()) {

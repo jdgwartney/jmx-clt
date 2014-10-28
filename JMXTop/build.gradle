@@ -104,6 +104,8 @@ task myTar(type: Tar) {
     }
 
     into("/JMXTop/") {from "bin/"}
+
+    into("/JMXTop/") {from "README.md"}
 }
 
 task myZip(type: Zip) {
@@ -115,6 +117,8 @@ task myZip(type: Zip) {
     }
 
     into("/JMXTop/") {from "bin/"}
+
+    into("/JMXTop/") {from "README.md"}
 }
 
 task build(overwrite: true) {

@@ -326,8 +326,8 @@ public class JMXTopMain {
                 .addOption(new Option("u",true,"User name for remote process"))
                 .addOption(new Option("p",true,"Password for remote process"))
                 .addOption(new Option("f",true,"Path to the configure file"))
-                .addOption(new Option("i",true,"Interval between two scan tasks"))
-                .addOption(new Option("A",false,"Show alias names instead of jmx paths"));
+                .addOption(new Option("i",true,"Interval between two scan tasks, unit is second"))
+                .addOption(new Option("a",false,"Show alias names instead of jmx paths"));
 
         CommandLineParser parser = new BasicParser();
         RunParameter runParameter = new RunParameter();
@@ -336,12 +336,12 @@ public class JMXTopMain {
             CommandLine cli = parser.parse(options,args);
             if (args.length == 0 || cli.hasOption('h')){
                 HelpFormatter formatter = new HelpFormatter();
-                formatter.printHelp("jmxTop jmxURL [argument] [path lists]","To view statuses of jmx paths:",options,"[Use F4 to exit top console]\n@Support by Logicmonitor",true);
+                formatter.printHelp("jmxTop jmxURL [jmx path lists]","To view statuses of jmx paths:",options,"[Use F4 to exit top console]\n@Support by Logicmonitor", true);
                 exit(0);
             }
 
             runParameter.setValid(true);
-            if (cli.hasOption('A')) {
+            if (cli.hasOption('a')) {
                 runParameter.setShowAliasTitle(true);
             }
             if (cli.hasOption('f')){
@@ -371,7 +371,7 @@ public class JMXTopMain {
             List<String> others = cli.getArgList();
             boolean jmxurl_found = false;
             for (String other:others){
-                if (other.toLowerCase().startsWith("service:jmx:rmi:///jndi/rmi://")) {
+                if (other.toLowerCase().startsWith("service:jmx:")) {
                     if (jmxurl_found) {
                         runParameter.setValid(false);
                         runParameter.setValidInfo(runParameter.getValidInfo()+"multiple jmxurl found\n");
@@ -386,7 +386,7 @@ public class JMXTopMain {
             }
             if (!jmxurl_found) {
                 runParameter.setValid(false);
-                runParameter.setValidInfo(runParameter.getValidInfo()+"No jmxurl found. The jmxurl should start with \"service:jmx:rmi:///jndi/rmi://\" \n");
+                runParameter.setValidInfo(runParameter.getValidInfo()+"No jmxurl found. The jmxurl should start with \"service:jmx:\" \n");
             }
         } catch (ParseException e) {
             e.printStackTrace();

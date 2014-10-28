@@ -97,6 +97,8 @@ task myTar(type: Tar) {
     }
 
     into("/JMXStat/") {from "bin/"}
+
+    into("/JMXStat/") {from "README.md"}
 }
 
 task myZip(type: Zip) {
@@ -108,6 +110,8 @@ task myZip(type: Zip) {
     }
 
     into("/JMXStat/") {from "bin/"}
+
+    into("/JMXStat/") {from "README.md"}
 }
 
 task build(overwrite : true) {

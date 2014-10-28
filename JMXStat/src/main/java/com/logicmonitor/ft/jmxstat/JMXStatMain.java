@@ -96,6 +96,7 @@ public class JMXStatMain {
     }
 
     private static void _showCompanyInfo() {
+        System.out.println("");
         System.out.println(" JMXstat was created by LogicMonitor under the BSD3 License.");
         System.out.println("");
         System.out.println(" To learn more about LogicMonitor and its automated IT Infrastructure Performance Monitoring Platform, visit www.logicmonitor.com.");
@@ -212,8 +213,8 @@ public class JMXStatMain {
                 .addOption(new Option("p",true,"Password for remote process"))
                 .addOption(new Option("f",true,"Path to the configure file"))
                 .addOption(new Option("t",true,"Exit after scanning jmx-paths n times"))
-                .addOption(new Option("i",true,"Interval between two scan tasks"))
-                .addOption(new Option("A",false,"Show alias names instead of jmx paths"));
+                .addOption(new Option("i",true,"Interval between two scan tasks, unit is second"))
+                .addOption(new Option("a",false,"Show alias names instead of jmx paths"));
 
         CommandLineParser parser = new BasicParser();
         RunParameter runParameter = new RunParameter();
@@ -222,12 +223,12 @@ public class JMXStatMain {
             CommandLine cli = parser.parse(options,args);
             if (args.length == 0 || cli.hasOption('h')){
                 HelpFormatter formatter = new HelpFormatter();
-                formatter.printHelp("jmxstat jmxURL [argument] [path lists]","To view statuses of jmx paths:",options,"@Support by Logicmonitor",true);
+                formatter.printHelp("jmxstat jmxURL [jmx path lists]","To view statuses of jmx paths:",options,"@Support by Logicmonitor", true);
                 exit(0);
             }
 
             runParameter.setValid(true);
-            if (cli.hasOption('A')) {
+            if (cli.hasOption('a')) {
                 runParameter.setShowAliasTitle(true);
             }
             if (cli.hasOption('f')){

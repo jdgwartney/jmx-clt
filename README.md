@@ -1,10 +1,10 @@
 JMXTop
 =====
-        display jmx path value like Linux command top
+        Display jmx path value like Linux command top.
 JMXStat
 =====
-        display jmx path value like Linux command 
+        Display jmx path value like Linux command. 
 Usage
 =====
-    see usage in JMXStat folder or JMXTop folder
+        Refer to README.md in JMXStat and JMXTop folder.
         
