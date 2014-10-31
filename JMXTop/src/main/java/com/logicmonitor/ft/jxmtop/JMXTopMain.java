@@ -1,10 +1,13 @@
 package com.logicmonitor.ft.jxmtop;
 
 import com.logicmonitor.ft.jmx.jmxman.*;
+import jcurses.widgets.Label;
+import jcurses.widgets.Window;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 import org.apache.commons.cli.*;
 
+import java.awt.*;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -13,6 +16,7 @@ import java.util.List;
 
 import jcurses.system.InputChar;
 import jcurses.widgets.*;
+import jcurses.system.Toolkit;
 
 import static java.lang.System.exit;
 
@@ -46,12 +50,12 @@ public class JMXTopMain {
 
     private static void topJMXValues(JMXMan jmxMan, RunParameter runParameter){
 
+        // use for general info
         JVMGeneral jvmGeneral = new JVMGeneral();
         List<String> generalPaths = jvmGeneral.getJVMGeneralPaths();
         List<String> memoryPoolUsed = jvmGeneral.getAllMemoryPoolUsed(jmxMan);
         List<String> memmoryPoolCommitted = jvmGeneral.getAllMemoryPoolCommitted(jmxMan);
 
-        List<JMXFullPath> fullPaths = jmxMan.getJmxFullPaths();
         List<String> memoryPoolNames = jmxMan.getIndexValues(jvmGeneral.getMemoryPoolUsed(),jvmGeneral.getMemoryPoolCommitted());
 
         int generalInfoCounts = 5 + memoryPoolNames.size() ;
@@ -61,7 +65,9 @@ public class JMXTopMain {
             maxMemoryPoolNameLength = maxMemoryPoolNameLength > memoryPoolName.length() ? maxMemoryPoolNameLength : memoryPoolName.length();
         }
 
+        // use for user path
         int maxPathLength = 0;
+        List<JMXFullPath> fullPaths = jmxMan.getJmxFullPaths();
         if (jmxMan.hasFullPath()) {
             int pathsNumb = fullPaths.size();
             for (JMXFullPath fullPath : fullPaths) {
@@ -73,86 +79,34 @@ public class JMXTopMain {
             }
         }
 
-        Window window = new Window(1,1,1000,100,false,"");
-        window.setShadow(false);
-        window.moveToTheTop();
-        DefaultLayoutManager mgr = new DefaultLayoutManager();
-        mgr.bindToContainer(window.getRootPanel());
-
         String[] companyInfo = new String[]{" JMXtop was created by LogicMonitor under the BSD3 License.",
                 "",
                 " To learn more about LogicMonitor and its automated IT Infrastructure Performance Monitoring Platform, visit www.logicmonitor.com.",
                 " For the latest updates, versions and configuration files, please visit our page on GitHub at https://github.com/logicmonitor/jmxtools."};
-        Label companyInfoLabels[] = new Label[companyInfo.length];
-        Label jvmGenLabels[] = new Label[generalInfoCounts];
-        Label valuesLabels[] = null;
+
 
         try {
+            int pathsNumb = fullPaths.size();
+            Label valuesLabels[] = new Label[pathsNumb];
+            Label companyInfoLabels[] = new Label[companyInfo.length];
+            Label jvmGenLabels[] = new Label[generalInfoCounts];
 
-            // company info
-            for (int i = 0; i < companyInfo.length; i++) {
-                companyInfoLabels[i] = new Label("initTop");
-                mgr.addWidget(companyInfoLabels[i],
-                        0, i, 40, 20,
-                        WidgetsConstants.ALIGNMENT_TOP, WidgetsConstants.ALIGNMENT_LEFT);
-            }
-
-            // general jvm info
-            String lastCPUTime = jmxMan.getValue(jvmGeneral.getCpuUsage());
+            long lastCPUTime = Long.valueOf(jmxMan.getValue(jvmGeneral.getCpuUsage()));
             List<String> lastValues = jmxMan.getValues();
             long lastSystemTime = System.currentTimeMillis();
 
-            for (int i = 0; i < generalInfoCounts; i++) {
-                jvmGenLabels[i] = new Label("initTop");
-                mgr.addWidget(jvmGenLabels[i],
-                        0, i + companyInfo.length, 40, 20,
-                        WidgetsConstants.ALIGNMENT_TOP, WidgetsConstants.ALIGNMENT_LEFT);
-            }
-
-            // user path
-            int pathsNumb = fullPaths.size();
-            valuesLabels = new Label[pathsNumb];
-            for (int i = 0; i < pathsNumb; i++) {
-                valuesLabels[i] = new Label("initTop");
-                mgr.addWidget(valuesLabels[i],
-                        0, i + generalInfoCounts + 1 + companyInfo.length, 40, 20,
-                        WidgetsConstants.ALIGNMENT_TOP, WidgetsConstants.ALIGNMENT_LEFT);
-            }
-
             int duration = runParameter.getInterval() * 1000;
-            boolean trigger = false;
-            int times = runParameter.getTimes();
 
+            DefaultLayoutManager mgr = new DefaultLayoutManager();
+            JMXWindow preWindow = null, window = null;
             while (true) {
-
-                for (int i = 0; i < companyInfo.length; i++) {
-                    mgr.removeWidget(companyInfoLabels[i]);
-                }
-
-                int maxGeneralInfoLength = 0;
-                for (int i = 0; i < generalInfoCounts; i++) {
-                    mgr.removeWidget(jvmGenLabels[i]);
-
-                }
-                if (!fullPaths.isEmpty()) {
-                    for (int i=0;i<fullPaths.size();i++){
-                        mgr.removeWidget(valuesLabels[i]);
-                    }
-                }
-
-                if (window.isClosed()) {
-                    System.out.println("Window is closed!");
-                    exit(-1);
-                }
-
-                mgr.unbindFromContainer();
-                Window tmpWin = window;
-                window = new Window(0,0,1000, 100, false, "");
+                window = new JMXWindow(0,0,1000, 100, false, "");
                 window.setShadow(false);
                 window.setClosingChar(new InputChar(InputChar.KEY_F4));
-
+                window.moveToTheTop();
                 mgr.bindToContainer(window.getRootPanel());
 
+                // show company info
                 int startLine = 0;
                 for (int i = 0; i < companyInfo.length; i++) {
                     companyInfoLabels[i] = new Label(companyInfo[i]);
@@ -162,11 +116,10 @@ public class JMXTopMain {
                     startLine++;
                 }
 
-
+                // show general info
                 List<String> generalValues = jmxMan.getValues(generalPaths);
                 List<String> memoryPoolUsedValues = jmxMan.getValues(memoryPoolUsed);
                 List<String> memoryPoolCommittedValues = jmxMan.getValues(memmoryPoolCommitted);
-                long cur_Time = System.currentTimeMillis();
                 SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
                 Long upTime = Long.valueOf(generalValues.get(0));
@@ -181,23 +134,28 @@ public class JMXTopMain {
                 else if (nMinis != 0) {
                     upTimeString = "" + nMinis + "m " + upTimeString;
                 }
+
+                int maxGeneralInfoLength = 0;
                 String topString = " JMXtop - " + df.format(new Date()) + " UP " + upTime + " da " + nHours;
                 maxGeneralInfoLength = topString.length()>maxGeneralInfoLength ? topString.length() : maxGeneralInfoLength;
                 String threadsInfo = " Thread: " + generalValues.get(1) + " live, " + generalValues.get(2) + " peak, " + generalValues.get(3) + " daemon, " + generalValues.get(4) + " total";
                 maxGeneralInfoLength = threadsInfo.length() > maxGeneralInfoLength ? threadsInfo.length() : maxGeneralInfoLength;
 
                 long cpuProcessTime = Long.valueOf(generalValues.get(5));
-                float cpuUsage = (cpuProcessTime - Long.valueOf(lastCPUTime)) / (1000 * (cur_Time - lastSystemTime) * Integer.valueOf(generalValues.get(6)));
-                String cpuInfo = String.format(" CPU: %.3fs, %.2f%% usage", (float) cpuProcessTime / 1000000000, cpuUsage);
+                long cur_Time = System.currentTimeMillis();
+                float cpuUsage = (float) ((cpuProcessTime - lastCPUTime) / (1000000.0 * (cur_Time - lastSystemTime) * Integer.valueOf(generalValues.get(6))));
+                String cpuInfo = String.format(" CPU: %.3fs, %.2f%% usage", (float) cpuProcessTime / 1000000000, cpuUsage * 100);
                 maxGeneralInfoLength = cpuInfo.length() > maxGeneralInfoLength ? cpuInfo.length() : maxGeneralInfoLength;
+                lastSystemTime = cur_Time;
+                lastCPUTime = cpuProcessTime;
 
                 long heapUsed = Long.valueOf(generalValues.get(7)) / 1024;
                 long heapCommitted = Long.valueOf(generalValues.get(8)) / 1024;
 
                 Long nonHeapUsed = Long.valueOf(generalValues.get(9)) / 1024;
                 Long nonHeapCommitted = Long.valueOf(generalValues.get(10)) / 1024;
-                String heapMemInfo = String.format(" %s : %10dKB used, %10dKB committed, %.2f%% usage",alignString("Heap",maxMemoryPoolNameLength), heapUsed, heapCommitted, (float) heapUsed*100 / heapCommitted);
-                String nonHeapMemInfo = String.format(" %s : %10dKB used, %10dKB committed, %.2f%% usage",alignString("NonHeap",maxMemoryPoolNameLength), nonHeapUsed, nonHeapCommitted, (float) nonHeapUsed*100 / nonHeapCommitted);
+                String heapMemInfo = String.format(" %s : %10dKB used, %10dKB committed, %02.2f%% usage",alignString("Heap",maxMemoryPoolNameLength), heapUsed, heapCommitted, (float) heapUsed*100 / heapCommitted);
+                String nonHeapMemInfo = String.format(" %s : %10dKB used, %10dKB committed, %02.2f%% usage",alignString("NonHeap",maxMemoryPoolNameLength), nonHeapUsed, nonHeapCommitted, (float) nonHeapUsed*100 / nonHeapCommitted);
                 maxGeneralInfoLength = heapMemInfo.length() > maxGeneralInfoLength ? heapMemInfo.length() : maxGeneralInfoLength;
                 maxGeneralInfoLength = nonHeapMemInfo.length() > maxGeneralInfoLength ? nonHeapMemInfo.length() : maxGeneralInfoLength;
 
@@ -211,7 +169,7 @@ public class JMXTopMain {
                 for (int i=0;i<memoryPoolNames.size();i++){
                     Long used = Long.valueOf(memoryPoolUsedValues.get(i))/1024;
                     Long commited = Long.valueOf(memoryPoolCommittedValues.get(i))/1024;
-                    jvmGenLabels[i+5] = new Label(String.format(" %s : %10dKB used, %10dKB committed, %.2f%% usage", alignString(memoryPoolNames.get(i).toString(),maxMemoryPoolNameLength), used, commited, (float) used*100 / commited));
+                    jvmGenLabels[i+5] = new Label(String.format(" %s : %10dKB used, %10dKB committed, %02.2f%% usage", alignString(memoryPoolNames.get(i).toString(),maxMemoryPoolNameLength), used, commited, (float) used*100 / commited));
                 }
 
                 startLine++;
@@ -222,10 +180,22 @@ public class JMXTopMain {
                     startLine++;
                 }
 
+                // show user jmx path
                 startLine++;
+                int startId = 0, endId = 0;
                 if (!fullPaths.isEmpty()){
                     List<String> curValuesOfFullPaths = jmxMan.getValues();
-                    for (int i = 0; i < curValuesOfFullPaths.size(); i++) {
+                    // support page down and up
+                    int pageSize = Math.max(window.getHeight() - startLine - 1, 1);
+                    int pageNum = JMXWindow.getPageNum();
+                    if (pageNum * pageSize >= curValuesOfFullPaths.size()) {
+                        pageNum = Math.max((curValuesOfFullPaths.size()- 1) / pageSize, 0);
+                        JMXWindow.setPageNum(pageNum);
+                    }
+                    startId = pageNum * pageSize;
+                    endId = Math.min(curValuesOfFullPaths.size(), (pageNum + 1) * pageSize);
+
+                    for (int i = startId; i < endId; i++) {
                         String curValue;
                         if (fullPaths.get(i).isCounter()){
                             long rst = Long.valueOf(curValuesOfFullPaths.get(i)) - Long.valueOf(lastValues.get(i));
@@ -275,10 +245,10 @@ public class JMXTopMain {
                     lastValues = curValuesOfFullPaths;
                 }
                 window.show();
-                if (trigger) {
-                    tmpWin.close();
-                } else
-                    trigger = true;
+                if (preWindow != null) {
+                    preWindow.close();
+                }
+                preWindow = window;
 
                 try {
                     Thread.sleep(duration);
@@ -287,9 +257,24 @@ public class JMXTopMain {
                     e.printStackTrace();
                 }
 
+                for (int i = 0; i < companyInfo.length; i++) {
+                    mgr.removeWidget(companyInfoLabels[i]);
+                }
+                for (int i = 0; i < generalInfoCounts; i++) {
+                    mgr.removeWidget(jvmGenLabels[i]);
+
+                }
+                for (int i = startId; i < endId; i++){
+                    mgr.removeWidget(valuesLabels[i]);
+                }
+
+                if (window.isClosed()) {
+                    System.out.println("Window is closed!");
+                    exit(-1);
+                }
+
+                mgr.unbindFromContainer();
             }
-
-
         }
         catch (IOException e) {
             e.printStackTrace();
@@ -336,7 +321,7 @@ public class JMXTopMain {
             CommandLine cli = parser.parse(options,args);
             if (args.length == 0 || cli.hasOption('h')){
                 HelpFormatter formatter = new HelpFormatter();
-                formatter.printHelp("jmxTop jmxURL [jmx path lists]","To view statuses of jmx paths:",options,"[Use F4 to exit top console]\n@Support by Logicmonitor", true);
+                formatter.printHelp("jmxTop jmxURL [jmx path lists]","To view statuses of jmx paths:",options,"[Use F4 to exit top console]\n[Use Key UP and Key DOWN to change page]\n@Support by Logicmonitor", true);
                 exit(0);
             }
 
