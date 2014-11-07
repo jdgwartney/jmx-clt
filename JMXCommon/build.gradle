@@ -70,7 +70,7 @@ jar {
 }
 //--------------------------------- Specific Tasks --------------------------------
 
-task copyToJMXStatLib(type: Copy) {
+task copyToJMXStatLib << {
     copy{
         from('build/libs') {
             include('JMXCommon.jar')
@@ -79,7 +79,7 @@ task copyToJMXStatLib(type: Copy) {
     }
 }
 
-task copyToJMXTopLib(type: Copy) {
+task copyToJMXTopLib << {
     copy{
         from('build/libs') {
             include('JMXCommon.jar')

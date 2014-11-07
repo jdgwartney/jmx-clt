@@ -79,10 +79,10 @@ public class JMXTopMain {
             }
         }
 
-        String[] companyInfo = new String[]{" JMXtop was created by LogicMonitor under the BSD3 License.",
+        String[] companyInfo = new String[]{" JMXTop was created by LogicMonitor under the BSD3 License.",
                 "",
                 " To learn more about LogicMonitor and its automated IT Infrastructure Performance Monitoring Platform, visit www.logicmonitor.com.",
-                " For the latest updates, versions and configuration files, please visit our page on GitHub at https://github.com/logicmonitor/jmxtools."};
+                " For the latest updates, versions and configuration files, please visit our page on GitHub at https://github.com/logicmonitor/JMX-Monitor-Suite."};
 
 
         try {

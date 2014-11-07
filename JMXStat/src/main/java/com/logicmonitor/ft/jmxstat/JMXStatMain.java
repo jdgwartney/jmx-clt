@@ -97,10 +97,10 @@ public class JMXStatMain {
 
     private static void _showCompanyInfo() {
         System.out.println("");
-        System.out.println(" JMXstat was created by LogicMonitor under the BSD3 License.");
+        System.out.println(" JMXStat was created by LogicMonitor under the BSD3 License.");
         System.out.println("");
         System.out.println(" To learn more about LogicMonitor and its automated IT Infrastructure Performance Monitoring Platform, visit www.logicmonitor.com.");
-        System.out.println(" For the latest updates, versions and configuration files, please visit our page on GitHub at https://github.com/logicmonitor/jmxtools.");
+        System.out.println(" For the latest updates, versions and configuration files, please visit our page on GitHub at https://github.com/logicmonitor/JMX-Monitor-Suite.");
         System.out.println("");
     }
 
