@@ -110,9 +110,9 @@ The builds from above produce the following archive files:
 Choose whichever format is most convenient (gzipped tar or zip) to unpack and install. For example:
 
 	# cd /usr/local
-	# tar -xzf {Your build area}/JMX-Monitor-Suite/JMXTop/build/distributions/JMXTop.tar.gz
+	# tar -xzf {Your build area}/jmx-clt/JMXTop/build/distributions/JMXTop.tar.gz
 	# chmod +x JMXTop/JMXTop.sh
-	# tar -xzf {Your build area}/JMX-Monitor-Suite/JMXStat/build/distributions/JMXStat.tar.gz
+	# tar -xzf {Your build area}/jmx-clt/JMXStat/build/distributions/JMXStat.tar.gz
 	# chmod +x JMXStat/JMXStat.sh
 
 Usage
