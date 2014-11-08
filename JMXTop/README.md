@@ -123,7 +123,7 @@ Both JMXTop and JMXStat have similar command-line arguments and configuration.
 To exit each tool:
 
 - Exit from JMXStat: ctrl + c
-- Exit from JMXTop: <F4> key
+- Exit from JMXTop: 'F4' key
 
 To change pages when using JMXTop:
 
@@ -176,7 +176,7 @@ The command would be:
 	 CMS Perm Gen       :      19181KB used,      21248KB committed, 90.27% usage
 	 Par Survivor Space :      13561KB used,      17472KB committed, 77.62% usage
 
-By default, JMXTop always shows the above statistics. If you want to view additional resources, you can either specify those JMX paths on the command line, or in a configuration file.  If you supply both, they effect is additive.
+By default, JMXTop always shows the above statistics. If you want to view additional resources, you can either specify those JMX paths on the command line, or in a configuration file.  If you supply both, the effect is additive.
 
 Next we have a JMXStat example to look at Usage at JMX address 127.0.0.1:9003, on the local host. The command would be:
 
