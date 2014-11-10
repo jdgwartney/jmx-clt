@@ -77,7 +77,7 @@ Next build JMXTop as follows:
 	:compileTestJava
 	   :
 	   :
-    :jmxTopJar
+        :jmxTopJar
 	:myTar
 	:myZip
 	:build
@@ -122,8 +122,8 @@ Both JMXTop and JMXStat have similar command-line arguments and configuration.
 
 To exit each tool:
 
-- Exit from JMXStat: ctrl + c
-- Exit from JMXTop: 'F4' key
+- Exit from JMXStat: Ctrl-c
+- Exit from JMXTop: Ctrl-c or 'q' key or 'Esc' key
 
 To change pages when using JMXTop:
 
@@ -143,7 +143,7 @@ Use the -h option to see usage:
 	 -i <arg>    Interval between two scan tasks, unit is second
 	 -p <arg>    Password for remote process
 	 -u <arg>    User name for remote process
-	[Use F4 to exit top console]
+	[Use 'Esc' or 'q' or 'Ctrl-c' to exit top console]
 	[Use Key UP and Key DOWN to change page]
 	@Support by Logicmonitor
 
@@ -181,8 +181,8 @@ By default, JMXTop always shows the above statistics. If you want to view additi
 Next we have a JMXStat example to look at Usage at JMX address 127.0.0.1:9003, on the local host. The command would be:
 
 	$ ./jmxstat.sh service:jmx:rmi:///jndi/rmi://127.0.0.1:9003/jmxrmi \
-	"java.lang:type=MemoryPool,name=Code Cache:Usage" \
-    -u demo -p demo123 -a
+	  "java.lang:type=MemoryPool,name=Code Cache:Usage" \
+      -u demo -p demo123 -a
 	
 	 JMXStat was created by LogicMonitor under the BSD3 License.
     

@@ -100,7 +100,7 @@ public class JMXStatMain {
         System.out.println(" JMXStat was created by LogicMonitor under the BSD3 License.");
         System.out.println("");
         System.out.println(" To learn more about LogicMonitor and its automated IT Infrastructure Performance Monitoring Platform, visit www.logicmonitor.com.");
-        System.out.println(" For the latest updates, versions and configuration files, please visit our page on GitHub at https://github.com/logicmonitor/JMX-Monitor-Suite.");
+        System.out.println(" For the latest updates, versions and configuration files, please visit our page on GitHub at https://github.com/logicmonitor/jmx-clt.git.");
         System.out.println("");
     }
 
@@ -223,7 +223,7 @@ public class JMXStatMain {
             CommandLine cli = parser.parse(options,args);
             if (args.length == 0 || cli.hasOption('h')){
                 HelpFormatter formatter = new HelpFormatter();
-                formatter.printHelp("jmxstat jmxURL [jmx path lists]","To view statuses of jmx paths:",options,"@Support by Logicmonitor", true);
+                formatter.printHelp("jmxstat jmxURL [jmx path lists]","To view statuses of jmx paths:",options,"@Support by LogicMonitor", true);
                 exit(0);
             }
 

@@ -82,7 +82,7 @@ public class JMXTopMain {
         String[] companyInfo = new String[]{" JMXTop was created by LogicMonitor under the BSD3 License.",
                 "",
                 " To learn more about LogicMonitor and its automated IT Infrastructure Performance Monitoring Platform, visit www.logicmonitor.com.",
-                " For the latest updates, versions and configuration files, please visit our page on GitHub at https://github.com/logicmonitor/JMX-Monitor-Suite."};
+                " For the latest updates, versions and configuration files, please visit our page on GitHub at https://github.com/logicmonitor/jmx-clt."};
 
 
         try {
@@ -102,7 +102,8 @@ public class JMXTopMain {
             while (true) {
                 window = new JMXWindow(0,0,1000, 100, false, "");
                 window.setShadow(false);
-                window.setClosingChar(new InputChar(InputChar.KEY_F4));
+                window.addClosingChar(new InputChar(JMXWindow.KEY_CTRL_C));
+                window.addClosingChar(new InputChar(JMXWindow.KEY_LOW_Q));
                 window.moveToTheTop();
                 mgr.bindToContainer(window.getRootPanel());
 
@@ -321,7 +322,7 @@ public class JMXTopMain {
             CommandLine cli = parser.parse(options,args);
             if (args.length == 0 || cli.hasOption('h')){
                 HelpFormatter formatter = new HelpFormatter();
-                formatter.printHelp("jmxTop jmxURL [jmx path lists]","To view statuses of jmx paths:",options,"[Use F4 to exit top console]\n[Use Key UP and Key DOWN to change page]\n@Support by Logicmonitor", true);
+                formatter.printHelp("jmxtop jmxURL [jmx path lists]","To view statuses of jmx paths:",options,"[Use 'Esc' or 'q' or 'Ctrl-c' to exit top console]\n[Use Key UP and Key DOWN to change pages]\n@Support by LogicMonitor", true);
                 exit(0);
             }
 
